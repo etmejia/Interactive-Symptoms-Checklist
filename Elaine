@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Symptoms Checklist</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .symptom-section {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e3f2fd;
+            border: 1px solid #64b5f6;
+            border-radius: 5px;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #1976d2;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #1565c0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Heart Symptom Checklist</h1>
+        <p>Select the symptoms you are experiencing:</p>
+
+        <form id="symptom-checklist">
+            <div class="symptom-section">
+                <h2>Chest Pain</h2>
+                <label><input type="checkbox" name="symptom" value="sharp_pain"> Sharp or stabbing pain</label>
+                <label><input type="checkbox" name="symptom" value="pressure"> Pressure, tightness, or squeezing sensation</label>
+                <label><input type="checkbox" name="symptom" value="radiating_pain"> Pain radiating to the jaw, shoulder, neck, or arm</label>
+                <label><input type="checkbox" name="symptom" value="activity_trigger"> Pain triggered by physical activity</label>
+                <label><input type="checkbox" name="symptom" value="rest_relief"> Pain that subsides with rest</label>
+            </div>
+
+            <div class="symptom-section">
+                <h2>Breathing Issues</h2>
+                <label><input type="checkbox" name="symptom" value="shortness_exertion"> Shortness of breath during exertion</label>
+                <label><input type="checkbox" name="symptom" value="shortness_rest"> Sudden shortness of breath even at rest</label>
+                <label><input type="checkbox" name="symptom" value="lying_down"> Difficulty breathing when lying down</label>
+                <label><input type="checkbox" name="symptom" value="persistent_wheezing"> Persistent wheezing</label>
+            </div>
+
+            <div class="symptom-section">
+                <h2>Heartbeat Irregularities</h2>
+                <label><input type="checkbox" name="symptom" value="palpitations"> Palpitations or racing heartbeat</label>
+                <label><input type="checkbox" name="symptom" value="irregular"> Skipped beats or irregular rhythm</label>
+                <label><input type="checkbox" name="symptom" value="slow_heartbeat"> Slow heartbeat</label>
+                <label><input type="checkbox" name="symptom" value="pounding"> Sudden pounding heartbeat</label>
+            </div>
+
+            <button type="button" class="btn" onclick="showResults()">Check Possible Conditions</button>
+        </form>
+
+        <div id="results" class="result" style="display: none;"></div>
+    </div>
+
+    <script>
+        function showResults() {
+            const symptoms = document.querySelectorAll('input[name="symptom"]:checked');
+            const resultDiv = document.getElementById('results');
+            let selectedSymptoms = [];
+
+            symptoms.forEach(symptom => {
+                selectedSymptoms.push(symptom.value);
+            });
+
+            // Simple example of condition matching
+            let result = "";
+            if (selectedSymptoms.includes('sharp_pain') && selectedSymptoms.includes('radiating_pain')) {
+                result = "<strong>Possible Condition:</strong> Angina or Heart Attack. Seek emergency care immediately. <br> St. Luke's Medical Center - Global City Ground Flr., Luis Co Chi Kiat Emergency Complex, Main Hospital Building Rizal Drive cor. 32nd St. and 5th Ave Taguig City, Philippines +63-2-8789-7700 ext. 1030/1107 <br> St. Luke's Medical Center - Quezon City 279 E Rodriguez Sr. Ave,Quezon City, Philippines +63-2-8723-0101 ext 1912 / 5433";
+            } else if (selectedSymptoms.includes('shortness_exertion') && selectedSymptoms.includes('persistent_wheezing')) {
+                result = "<strong>Possible Condition:</strong> Congestive Heart Failure. Consult a cardiologist.";
+            } else if (selectedSymptoms.includes('palpitations') && selectedSymptoms.includes('irregular')) {
+                result = "<strong>Possible Condition:</strong> Arrhythmia or Atrial Fibrillation. <a href=\"https://www.stlukes.com.ph/contact-us?inquiry_type=service-inquiry&subject=ECG,%20Holter%20Monitoring%20and%20Pacemaker%20Clinic:%20Electrocardiogram%20(ECG)\" target=\"_blank\">Click here to schedule an ECG</a>";
+            } else {
+                result = "<strong>Advice:</strong> Please consult a healthcare professional for an accurate diagnosis.";
+            }
+
+            resultDiv.innerHTML = result;
+            resultDiv.style.display = "block";
+        }
+    </script>
+</body>
+</html>
